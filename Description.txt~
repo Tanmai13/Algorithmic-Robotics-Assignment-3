@@ -1,0 +1,28 @@
+
+The planner takes advantage of a modified Weighted A* algorithm to catch moving objects in the provided environments (maps). In order to make the robot be able to take actions promptly, the algorithm uses a compressed 1D search space (cell index) instead of 3D (x, y, theta). The lower-dimensional search space provides the algorihm with higher efficiency and lower computation in finding the solution. 
+
+If a complete, valid path has been generated during one call to the planner function using the Weighted A*, the plan (stored in a map) can be always re-used in the following calls to the planner function. The plan will be re-computed/ updated when: 
+
+1.the robot gets closer than some threshold (set as 5 currently) to the moving target  OR
+2.the robot does not make large enough move during consecutive steps. 
+
+This again provides the algorithm with more computational efficiency. 
+
+The cost for each motion primitive is designed to be the same during one move. A fixed weight of 5 is currently used for the algorithm. A basic heuristics is used based on the euclidean distance between the robot and the moving target. Though with only simple heuristics, the algorithm can successfully complete the tasks along close-to-optimal paths and with fast speed under various test cases.
+
+These test cases include:
+
+Start     Goal
+[1  1  0] [20 10 0] map3
+[25 25 0] [40 40 0] map3
+[25 35 0] [40 40 0] map3
+[5  38 0] [40 40 0] map3
+[2  28 0] [40 40 0] map3
+[13 31 0] [40 40 0] map3
+
+
+[70  80 0] [85 170 0] map1
+[15  44 0] [167 59 0] map1
+[146 72 0] [167 78 0] map1  
+
+
